@@ -182,3 +182,77 @@ a {
     gap: 10px 18px;
   }
 }
+
+/* ========================================
+   SHARED UI
+======================================== */
+
+.site-container {
+  width: min(100% - 84px, 1600px);
+  margin-inline: auto;
+}
+
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  font-family: "Courier New", monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+
+  text-transform: uppercase;
+}
+
+.section-number {
+  color: var(--azure);
+}
+
+.section-label-text {
+  color: var(--foreground-muted);
+}
+
+.status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  color: var(--foreground-muted);
+
+  font-family: "Courier New", monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+}
+
+.status-indicator-dot {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+}
+
+.status-success {
+  background: var(--success);
+  box-shadow: 0 0 12px rgba(53, 208, 127, 0.75);
+}
+
+.status-warning {
+  background: var(--warning);
+  box-shadow: 0 0 12px rgba(255, 176, 32, 0.75);
+}
+
+.status-critical {
+  background: var(--critical);
+  box-shadow: 0 0 12px rgba(255, 77, 77, 0.75);
+}
+
+.status-azure {
+  background: var(--azure);
+  box-shadow: 0 0 12px rgba(22, 139, 255, 0.75);
+}
+
+@media (max-width: 700px) {
+  .site-container {
+    width: min(100% - 40px, 1600px);
+  }
+}
