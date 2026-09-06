@@ -1,5 +1,3 @@
-import { StatusIndicator } from "@/components/ui/StatusIndicator";
-
 const technologies = [
   "AZURE",
   "ENTRA ID",
@@ -12,18 +10,9 @@ const technologies = [
 export function Hero() {
   return (
     <section className="foundation-screen">
-      <div className="foundation-topbar">
-        <span>OBED://CLOUD_PLATFORM</span>
-
-        <StatusIndicator
-          label="SYSTEM ONLINE"
-          tone="success"
-        />
-      </div>
-
       <div className="foundation-content">
         <p className="eyebrow">
-          CLOUD_PLATFORM_ENGINEER
+          CLOUD PLATFORM ENGINEER
         </p>
 
         <h1>
@@ -48,7 +37,9 @@ export function Hero() {
 
       <div className="foundation-footer">
         {technologies.map((technology) => (
-          <span key={technology}>{technology}</span>
+          <span key={technology}>
+            {technology}
+          </span>
         ))}
       </div>
     </section>
