@@ -325,3 +325,216 @@ a {
     padding: 22px 20px;
   }
 }
+
+/* ========================================
+   SECTION SYSTEM
+======================================== */
+
+.section-shell {
+  position: relative;
+
+  padding: 140px 0;
+
+  border-top: 1px solid var(--border);
+}
+
+.section-shell-content {
+  margin-top: 58px;
+}
+
+.section-shell-title {
+  margin: 0;
+
+  max-width: 1100px;
+
+  font-size: clamp(48px, 7vw, 112px);
+  line-height: 0.92;
+  letter-spacing: -0.055em;
+  font-weight: 800;
+}
+
+.section-shell-body {
+  margin-top: 56px;
+}
+
+.section-intro {
+  max-width: 720px;
+
+  margin: 0;
+
+  color: var(--foreground-muted);
+
+  font-size: clamp(16px, 1.3vw, 20px);
+  line-height: 1.7;
+}
+
+/* ========================================
+   ABOUT
+======================================== */
+
+.about-copy {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 48px;
+
+  max-width: 1000px;
+}
+
+.about-copy p {
+  margin: 0;
+
+  color: var(--foreground-muted);
+
+  font-size: clamp(16px, 1.25vw, 19px);
+  line-height: 1.75;
+}
+
+/* ========================================
+   PROJECT PREVIEWS
+======================================== */
+
+.project-preview-list {
+  border-top: 1px solid var(--border);
+}
+
+.project-preview {
+  display: grid;
+  grid-template-columns: 80px minmax(0, 1fr) auto;
+  gap: 32px;
+
+  padding: 42px 0;
+
+  border-bottom: 1px solid var(--border);
+}
+
+.project-preview-number {
+  color: var(--azure);
+
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+}
+
+.project-preview-category {
+  margin: 0 0 12px;
+
+  color: var(--foreground-muted);
+
+  font-family: "Courier New", monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.project-preview h3 {
+  margin: 0;
+
+  max-width: 900px;
+
+  font-size: clamp(28px, 3vw, 52px);
+  line-height: 1;
+  letter-spacing: -0.035em;
+}
+
+.project-preview-description {
+  max-width: 760px;
+
+  margin: 22px 0 0;
+
+  color: var(--foreground-muted);
+
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.project-preview-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+
+  margin-top: 22px;
+}
+
+.project-preview-tech span,
+.project-preview-status {
+  font-family: "Courier New", monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+}
+
+.project-preview-tech span {
+  color: var(--foreground-muted);
+}
+
+.project-preview-status {
+  color: var(--success);
+  white-space: nowrap;
+}
+
+/* ========================================
+   CONTACT
+======================================== */
+
+.contact-placeholder {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px 32px;
+
+  color: var(--foreground-muted);
+
+  font-family: "Courier New", monospace;
+  font-size: 11px;
+  letter-spacing: 0.13em;
+}
+
+/* ========================================
+   SECTION RESPONSIVE
+======================================== */
+
+@media (max-width: 900px) {
+  .section-shell {
+    padding: 100px 0;
+  }
+
+  .about-copy {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .project-preview {
+    grid-template-columns: 50px minmax(0, 1fr);
+  }
+
+  .project-preview-status {
+    grid-column: 2;
+  }
+}
+
+@media (max-width: 700px) {
+  .section-shell {
+    padding: 82px 0;
+  }
+
+  .section-shell-content {
+    margin-top: 38px;
+  }
+
+  .section-shell-title {
+    font-size: clamp(46px, 15vw, 76px);
+  }
+
+  .section-shell-body {
+    margin-top: 38px;
+  }
+
+  .project-preview {
+    grid-template-columns: 1fr;
+    gap: 12px;
+
+    padding: 34px 0;
+  }
+
+  .project-preview-status {
+    grid-column: 1;
+  }
+}
