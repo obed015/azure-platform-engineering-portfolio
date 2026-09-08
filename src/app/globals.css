@@ -58,9 +58,6 @@ a {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-
-  /* Navigation owns the top of the viewport,
-     so the hero starts below it. */
   padding: 92px 42px 28px;
 }
 
@@ -248,24 +245,58 @@ a {
 ======================================== */
 
 .site-navigation {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
 
   width: 100%;
 
-  z-index: 20;
+  z-index: 50;
+
+  border-bottom: 1px solid transparent;
+
+  background: transparent;
+
+  transition:
+    background 250ms ease,
+    border-color 250ms ease,
+    backdrop-filter 250ms ease;
+}
+
+.site-navigation-scrolled {
+  background: rgba(5, 7, 10, 0.78);
+
+  border-bottom-color: var(--border);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
 }
 
 .site-navigation-inner {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
-  justify-content: space-between;
+  gap: 36px;
 
-  padding: 28px 42px;
+  width: 100%;
+
+  padding: 26px 42px;
+
+  transition: padding 250ms ease;
 }
 
+.site-navigation-scrolled .site-navigation-inner {
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+
+/* BRAND */
+
 .site-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
   color: var(--foreground);
 
   text-decoration: none;
@@ -274,6 +305,8 @@ a {
   font-size: 11px;
   letter-spacing: 0.14em;
 
+  white-space: nowrap;
+
   transition: color 180ms ease;
 }
 
@@ -281,10 +314,22 @@ a {
   color: var(--azure);
 }
 
+.site-brand-mark {
+  color: var(--foreground);
+}
+
+.site-brand-divider {
+  color: var(--azure);
+}
+
+/* NAVIGATION LIST */
+
 .navigation-list {
   display: flex;
   align-items: center;
-  gap: 26px;
+  justify-content: flex-end;
+
+  gap: clamp(18px, 2vw, 34px);
 
   margin: 0;
   padding: 0;
@@ -292,10 +337,14 @@ a {
   list-style: none;
 }
 
-.navigation-list a {
-  display: flex;
+.navigation-link {
+  position: relative;
+
+  display: inline-flex;
   align-items: center;
   gap: 8px;
+
+  padding: 8px 0;
 
   color: var(--foreground-muted);
 
@@ -305,15 +354,108 @@ a {
   font-size: 10px;
   letter-spacing: 0.12em;
 
-  transition: color 180ms ease;
+  transition:
+    color 180ms ease,
+    opacity 180ms ease;
 }
 
-.navigation-list a:hover {
+.navigation-link:hover {
   color: var(--foreground);
 }
 
 .navigation-number {
   color: var(--azure);
+
+  transition: opacity 180ms ease;
+}
+
+.navigation-label {
+  transition: color 180ms ease;
+}
+
+/* ACTIVE SECTION */
+
+.navigation-link-active {
+  color: var(--foreground);
+}
+
+.navigation-link-active .navigation-label {
+  color: var(--foreground);
+}
+
+.navigation-active-dot {
+  position: absolute;
+
+  left: 50%;
+  bottom: 0;
+
+  width: 4px;
+  height: 4px;
+
+  border-radius: 50%;
+
+  opacity: 0;
+
+  transform:
+    translateX(-50%)
+    scale(0.5);
+
+  background: var(--azure);
+
+  box-shadow: 0 0 10px rgba(22, 139, 255, 0.9);
+
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+.navigation-link-active .navigation-active-dot {
+  opacity: 1;
+
+  transform:
+    translateX(-50%)
+    scale(1);
+}
+
+/* SYSTEM STATUS */
+
+.navigation-system-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  color: var(--foreground-muted);
+
+  font-family: "Courier New", monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+
+  white-space: nowrap;
+}
+
+.navigation-status-dot {
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background: var(--success);
+
+  box-shadow: 0 0 10px rgba(53, 208, 127, 0.8);
+}
+
+/* ========================================
+   NAVIGATION RESPONSIVE
+======================================== */
+
+@media (max-width: 1050px) {
+  .navigation-system-status {
+    display: none;
+  }
+
+  .site-navigation-inner {
+    grid-template-columns: auto 1fr;
+  }
 }
 
 @media (max-width: 900px) {
@@ -322,7 +464,28 @@ a {
   }
 
   .site-navigation-inner {
+    display: flex;
+    justify-content: space-between;
+
     padding: 22px 20px;
+  }
+
+  .site-navigation-scrolled .site-navigation-inner {
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+
+  .navigation-system-status {
+    display: inline-flex;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-navigation,
+  .site-navigation-inner,
+  .navigation-link,
+  .navigation-active-dot {
+    transition: none;
   }
 }
 
