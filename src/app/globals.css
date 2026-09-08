@@ -538,3 +538,177 @@ a {
     grid-column: 1;
   }
 }
+
+/* ========================================
+   BOOT SEQUENCE
+======================================== */
+
+.boot-sequence {
+  position: fixed;
+  inset: 0;
+
+  z-index: 100;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 32px;
+
+  background:
+    radial-gradient(
+      circle at 70% 35%,
+      rgba(22, 139, 255, 0.08),
+      transparent 35%
+    ),
+    var(--background);
+
+  color: var(--foreground);
+}
+
+.boot-sequence-inner {
+  width: min(100%, 620px);
+}
+
+.boot-brand {
+  margin: 0 0 32px;
+
+  color: var(--azure);
+
+  font-family: "Courier New", monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+}
+
+.boot-title {
+  margin: 0 0 42px;
+
+  font-size: clamp(34px, 5vw, 70px);
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+  font-weight: 800;
+}
+
+.boot-items {
+  display: grid;
+  gap: 14px;
+}
+
+.boot-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  color: var(--foreground-muted);
+
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+}
+
+.boot-check {
+  width: 18px;
+
+  color: var(--foreground-muted);
+}
+
+.boot-check-complete {
+  color: var(--success);
+}
+
+.boot-progress {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 18px;
+
+  margin-top: 36px;
+}
+
+.boot-progress-track {
+  height: 2px;
+
+  overflow: hidden;
+
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.boot-progress-bar {
+  width: 0;
+  height: 100%;
+
+  background: var(--azure);
+
+  box-shadow: 0 0 14px rgba(22, 139, 255, 0.8);
+}
+
+.boot-progress-value {
+  min-width: 42px;
+
+  color: var(--foreground-muted);
+
+  font-family: "Courier New", monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-align: right;
+}
+
+.boot-ready {
+  margin: 24px 0 0;
+
+  opacity: 0;
+
+  transform: translateY(6px);
+
+  color: var(--success);
+
+  font-family: "Courier New", monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+}
+
+.platform-experience {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.platform-experience-ready {
+  opacity: 1;
+  pointer-events: auto;
+
+  animation: platform-reveal 500ms ease forwards;
+}
+
+@keyframes platform-reveal {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 700px) {
+  .boot-sequence {
+    padding: 24px 20px;
+  }
+
+  .boot-brand {
+    margin-bottom: 24px;
+  }
+
+  .boot-title {
+    margin-bottom: 34px;
+  }
+
+  .boot-item {
+    font-size: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .platform-experience-ready {
+    animation: none;
+  }
+}

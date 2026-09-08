@@ -1,10 +1,4 @@
-import { About } from "@/components/about/About";
-import { Contact } from "@/components/contact/Contact";
-import { Experience } from "@/components/experience/Experience";
-import { Hero } from "@/components/hero/Hero";
-import { Lab } from "@/components/lab/Lab";
-import { Navigation } from "@/components/navigation/Navigation";
-import { Projects } from "@/components/projects/Projects";
+import { PlatformExperience } from "@/components/boot/PlatformExperience";
 
 export default function Home() {
   return (
@@ -12,19 +6,7 @@ export default function Home() {
       id="top"
       className="platform-shell"
     >
-      <Navigation />
-
-      <Hero />
-
-      <About />
-
-      <Projects />
-
-      <Lab />
-
-      <Experience />
-
-      <Contact />
+      <PlatformExperience />
     </main>
   );
 }
