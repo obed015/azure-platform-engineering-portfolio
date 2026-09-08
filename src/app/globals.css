@@ -712,3 +712,30 @@ a {
     animation: none;
   }
 }
+
+/* ========================================
+   HERO MOTION
+======================================== */
+
+.hero-name-line {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+.hero-eyebrow,
+.hero-statement-item,
+.hero-description,
+.hero-tech-item {
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-name-line,
+  .hero-eyebrow,
+  .hero-statement-item,
+  .hero-description,
+  .hero-tech-item {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
