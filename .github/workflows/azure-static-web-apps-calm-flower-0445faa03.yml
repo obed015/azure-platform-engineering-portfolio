@@ -34,6 +34,9 @@ jobs:
           api_location: ""
           output_location: "out"
 
+        env:
+          IS_STATIC_EXPORT: true
+
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
