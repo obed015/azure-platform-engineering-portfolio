@@ -9,7 +9,7 @@ import { CloudPolicyValidation } from "./CloudPolicyValidation";
 const impact = [
   "Standardized governance across Azure environments by deploying reusable policy definitions, initiatives, and assignments as code.",
   "Reduced cloud misconfiguration risk by detecting risky Storage Account settings through Azure Policy at management-group scope.",
-  "Improved compliance visibility by centralizing policy state evidence into a Log Analytics-backed Azure Workbook dashboard.",
+  "Improved compliance visibility through an Azure Workbook using Azure Resource Graph PolicyResources for live compliance state, with Log Analytics supporting operational telemetry and investigation.",
   "Reduced manual reporting effort with audit-ready compliance views, affected resources, and policy results in one dashboard.",
   "Improved operational response through Azure Monitor alerts and Action Group email notification.",
   "Reduced remediation effort using Azure Policy modify remediation with managed identity.",
@@ -33,7 +33,7 @@ const controlFlow = [
     title: "rg-governance-core observability layer",
     meta: "Subscription scope",
     body:
-      "A governance resource group hosts the Log Analytics workspace, workbook, action group, and log search alert rules.",
+      "A governance resource group hosts the Azure Workbook, Log Analytics workspace, Action Group, and alerting resources. Workbook compliance views query Azure Resource Graph PolicyResources, while Log Analytics supports operational telemetry and investigation.",
   },
   {
     title: "Diagnostic settings + Policy states",
@@ -150,10 +150,10 @@ export function CloudPolicyProject() {
             {[
               "BICEP GOVERNANCE AS CODE",
               "MG-PLATFORM INITIATIVE",
-              "LOG ANALYTICS + WORKBOOK",
+              "RESOURCE GRAPH + WORKBOOK",
+              "LOG ANALYTICS TELEMETRY",
               "AZURE MONITOR ALERTS",
               "MANAGED IDENTITY REMEDIATION",
-              "POLICY STATES + KQL",
             ].map((tag) => (
               <span key={tag}>{tag}</span>
             ))}
@@ -164,15 +164,24 @@ export function CloudPolicyProject() {
             <a href="#architecture">ARCHITECTURE</a>
             <a href="#gallery">GALLERY</a>
             <a href="#validation">VALIDATION FLOW</a>
+
             <Link href="/projects/cloud-policy-compliance-dashboard/deep-dive">
               ENGINEERING DEEP DIVE ↗
             </Link>
           </div>
 
           <div className="cp-meta">
-            <span>● SCOPE / MG-PLATFORM + LEARNINGCLOUD SUBSCRIPTION</span>
-            <span>● SIGNAL / WORKBOOK + POLICY STATE + ALERT HISTORY</span>
-            <span>● OUTCOME / DETECT → ALERT → REMEDIATE → COMPLIANT</span>
+            <span>
+              ● SCOPE / MG-PLATFORM + LEARNINGCLOUD SUBSCRIPTION
+            </span>
+
+            <span>
+              ● SIGNAL / WORKBOOK + POLICY STATE + ALERT HISTORY
+            </span>
+
+            <span>
+              ● OUTCOME / DETECT → ALERT → REMEDIATE → COMPLIANT
+            </span>
           </div>
 
           <nav className="cp-nav">
@@ -219,10 +228,12 @@ export function CloudPolicyProject() {
                 <span>SCOPE</span>
                 <strong>MG-PLATFORM</strong>
               </div>
+
               <div>
                 <span>VISIBILITY</span>
                 <strong>WORKBOOK</strong>
               </div>
+
               <div>
                 <span>RESPONSE</span>
                 <strong>MODIFY</strong>
@@ -232,8 +243,9 @@ export function CloudPolicyProject() {
             <pre>{`GitHub → Bicep
 → mg-platform initiative
 → rg-governance-core
-→ Log Analytics + Workbook
-→ Scheduled Query Alert
+→ Azure Resource Graph
+→ Azure Workbook
+→ Azure Monitor Alert
 → Action Group
 → Policy Remediation
 → Storage hardened
@@ -253,7 +265,11 @@ export function CloudPolicyProject() {
       <section id="overview" className="cp-section">
         <div className="cp-heading">
           <span>01 / OVERVIEW</span>
-          <h2>WHAT THIS PLATFORM SOLVES.</h2>
+
+          <h2>
+            WHAT THIS PLATFORM SOLVES.
+          </h2>
+
           <p>
             In many Azure estates, policy exists but operations
             stop at basic auditing. This project turns governance
@@ -267,30 +283,50 @@ export function CloudPolicyProject() {
         <div className="cp-two-grid">
           <article className="cp-panel">
             <small>THE BASELINE</small>
+
             <h3>
               MANAGEMENT-GROUP GOVERNANCE INSTEAD OF ONE-OFF
               SUBSCRIPTION CHECKS.
             </h3>
+
             <p>
               A custom Cloud Governance Baseline initiative is
               assigned at mg-platform. A dedicated governance
               resource group hosts the workspace, workbook,
               action group, and alert rules.
             </p>
+
             <ul>
-              <li>Custom policy definitions and initiative deployed with Bicep.</li>
-              <li>Initiative assigned at management-group scope with managed identity.</li>
-              <li>Governance workspace centralized in rg-governance-core.</li>
-              <li>Workbook, alerts, and remediation operationalize policy state.</li>
+              <li>
+                Custom policy definitions and initiative deployed
+                with Bicep.
+              </li>
+
+              <li>
+                Initiative assigned at management-group scope with
+                managed identity.
+              </li>
+
+              <li>
+                Governance workspace centralized in
+                rg-governance-core.
+              </li>
+
+              <li>
+                Workbook, alerts, and remediation operationalize
+                policy state.
+              </li>
             </ul>
           </article>
 
           <article className="cp-panel">
             <small>THE FINISHED STORY</small>
+
             <h3>
               A FULL GOVERNANCE LIFECYCLE, NOT JUST COMPLIANCE
               REPORTING.
             </h3>
+
             <p>
               A non-compliant Storage Account is detected,
               visualized, used to fire an alert, and then
@@ -317,6 +353,7 @@ export function CloudPolicyProject() {
       <section id="business-impact" className="cp-section">
         <div className="cp-heading">
           <span>02 / BUSINESS IMPACT</span>
+
           <h2>
             GOVERNANCE THAT MOVES FROM PASSIVE REPORTING TO
             OPERATIONAL RESPONSE.
@@ -335,34 +372,70 @@ export function CloudPolicyProject() {
       <section id="controls" className="cp-section">
         <div className="cp-heading">
           <span>03 / GOVERNANCE CONTROLS</span>
-          <h2>HOW THE CONTROLS WORK TOGETHER.</h2>
+
+          <h2>
+            HOW THE CONTROLS WORK TOGETHER.
+          </h2>
+
           <p>
-            Policy enforces the standard. Diagnostic settings
-            provide activity data. Workbook queries summarize
-            policy state. Scheduled query alerts react to drift.
-            Remediation uses assignment identity to correct a
-            real resource property.
+            Policy enforces the standard. Azure Resource Graph
+            exposes live policy compliance state to the Workbook.
+            Diagnostic settings stream Activity Log data into Log
+            Analytics for operational telemetry and investigation.
+            Azure Monitor alerts react to drift, while remediation
+            uses the assignment identity to correct a real
+            resource property.
           </p>
         </div>
 
         <div className="cp-two-grid">
           <article className="cp-panel">
             <small>DETECTION + VISIBILITY</small>
+
             <ul>
-              <li>Custom audit policy flags risky Storage Account configuration.</li>
-              <li>Activity Log diagnostic settings stream Policy events.</li>
-              <li>Workbook visuals show non-compliance and affected resources.</li>
-              <li>KQL remains stored in repo beside the governance code.</li>
+              <li>
+                Custom audit policy flags risky Storage Account
+                configuration.
+              </li>
+
+              <li>
+                Azure Resource Graph PolicyResources provides live
+                policy compliance state.
+              </li>
+
+              <li>
+                Workbook visuals show non-compliance and affected
+                resources.
+              </li>
+
+              <li>
+                Activity Log diagnostic settings stream Policy
+                events into Log Analytics for investigation.
+              </li>
             </ul>
           </article>
 
           <article className="cp-panel">
             <small>RESPONSE + CORRECTION</small>
+
             <ul>
-              <li>Azure Monitor log search alert reacts to non-compliance.</li>
-              <li>Action Group email proves the notification path.</li>
-              <li>Managed identity is attached to the initiative assignment.</li>
-              <li>Modify remediation sets allowBlobPublicAccess = false.</li>
+              <li>
+                Azure Monitor alerting reacts to non-compliance.
+              </li>
+
+              <li>
+                Action Group email proves the notification path.
+              </li>
+
+              <li>
+                Managed identity is attached to the initiative
+                assignment.
+              </li>
+
+              <li>
+                Modify remediation sets
+                allowBlobPublicAccess = false.
+              </li>
             </ul>
           </article>
         </div>
@@ -371,23 +444,34 @@ export function CloudPolicyProject() {
       <section id="architecture" className="cp-section">
         <div className="cp-heading">
           <span>04 / AZURE ARCHITECTURE</span>
-          <h2>FROM GIT PUSH TO RESTORED COMPLIANCE.</h2>
+
+          <h2>
+            FROM GIT PUSH TO RESTORED COMPLIANCE.
+          </h2>
+
           <p>
             The flow follows the real build: Bicep deployment,
             management-group policy, centralized governance
-            resources, live policy-state detection, alerting,
+            resources, live policy-state detection through Azure
+            Resource Graph, workbook visualization, operational
+            telemetry through Log Analytics, alerting,
             managed-identity remediation, and final verification.
           </p>
         </div>
 
         <div className="cp-two-grid">
           <article className="cp-panel">
-            <div className="cp-panel-label">CONTROL-PLANE FLOW</div>
+            <div className="cp-panel-label">
+              CONTROL-PLANE FLOW
+            </div>
 
             <div className="cp-step-list">
               {controlFlow.map((step, index) => (
                 <div key={step.title} className="cp-step">
-                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <span>
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+
                   <div>
                     <h3>{step.title}</h3>
                     <small>{step.meta}</small>
@@ -399,18 +483,38 @@ export function CloudPolicyProject() {
           </article>
 
           <article className="cp-panel">
-            <div className="cp-panel-label">VALIDATION FLOW</div>
+            <div className="cp-panel-label">
+              VALIDATION FLOW
+            </div>
 
             <div className="cp-step-list">
               {[
-                ["Create a non-compliant Storage Account", "Blob public access and exposure settings create a real policy violation."],
-                ["Force policy scan", "The resource appears as NonCompliant in Azure Policy and workbook queries."],
-                ["Validate alerting", "The alert fires, appears in history, and sends Action Group email."],
-                ["Grant assignment identity RBAC", "Contributor is granted at subscription scope for modify remediation."],
-                ["Run remediation and verify", "allowBlobPublicAccess becomes false and policy returns to compliant."],
+                [
+                  "Create a non-compliant Storage Account",
+                  "Blob public access and exposure settings create a real policy violation.",
+                ],
+                [
+                  "Force policy scan",
+                  "The resource appears as NonCompliant in Azure Policy and workbook queries.",
+                ],
+                [
+                  "Validate alerting",
+                  "The alert fires, appears in history, and sends Action Group email.",
+                ],
+                [
+                  "Grant assignment identity RBAC",
+                  "Contributor is granted at subscription scope for modify remediation.",
+                ],
+                [
+                  "Run remediation and verify",
+                  "allowBlobPublicAccess becomes false and policy returns to compliant.",
+                ],
               ].map(([title, body], index) => (
                 <div key={title} className="cp-step">
-                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <span>
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+
                   <div>
                     <h3>{title}</h3>
                     <p>{body}</p>
@@ -423,8 +527,13 @@ export function CloudPolicyProject() {
 
         <div className="cp-topology">
           <div className="cp-topology-head">
-            <span>CONTROL SURFACE / GOVERNANCE LIFECYCLE</span>
-            <strong>DETECT → VISUALIZE → ALERT → REMEDIATE</strong>
+            <span>
+              CONTROL SURFACE / GOVERNANCE LIFECYCLE
+            </span>
+
+            <strong>
+              DETECT → VISUALIZE → ALERT → REMEDIATE
+            </strong>
           </div>
 
           <pre>{`Repository
@@ -433,28 +542,43 @@ Bicep deployment
    ↓
 mg-platform / Cloud Governance Baseline
    ↓
-Policy states ───────────────┐
-   ↓                         │
-Log Analytics + Workbook     │
-   ↓                         │
-Scheduled Query Alert        │
-   ↓                         │
-Action Group Email           │
-   ↓                         │
-Managed Identity Remediation │
-   ↓                         │
-Storage setting hardened     │
-   ↓                         │
-100% compliant ←─────────────┘`}</pre>
+Azure Policy compliance state
+   ↓
+Azure Resource Graph / PolicyResources
+   ↓
+Azure Workbook
+   ↓
+Non-compliance detected
+   ↓
+Azure Monitor Alert
+   ↓
+Action Group Email
+   ↓
+Managed Identity Remediation
+   ↓
+Storage setting hardened
+   ↓
+100% compliant
+
+Operational telemetry path:
+Azure Activity Log
+   ↓
+Diagnostic Settings
+   ↓
+Log Analytics
+   ↓
+Validation + Investigation`}</pre>
         </div>
       </section>
 
       <CloudPolicyGallery />
+
       <CloudPolicyValidation />
 
       <section id="techstack" className="cp-section">
         <div className="cp-heading">
           <span>07 / TECH STACK</span>
+
           <h2>
             AZURE-NATIVE GOVERNANCE AND OPERATIONS BUILDING
             BLOCKS.
@@ -464,22 +588,50 @@ Storage setting hardened     │
         <div className="cp-two-grid">
           <article className="cp-panel">
             <small>CONTROL PLANE</small>
+
             <ul>
               <li>Azure Policy custom definitions</li>
               <li>Management-group policy initiative</li>
-              <li>Bicep management-group and subscription deployments</li>
-              <li>Managed identity policy assignment</li>
+
+              <li>
+                Bicep management-group and subscription
+                deployments
+              </li>
+
+              <li>
+                Managed identity policy assignment
+              </li>
             </ul>
           </article>
 
           <article className="cp-panel">
             <small>OBSERVABILITY + RESPONSE</small>
+
             <ul>
-              <li>Log Analytics workspace</li>
-              <li>Azure Workbook + KQL-backed visuals</li>
-              <li>Azure Monitor log search alerts</li>
-              <li>Action Group email notification</li>
-              <li>Azure Policy remediation tasks</li>
+              <li>
+                Azure Resource Graph PolicyResources
+              </li>
+
+              <li>
+                Azure Workbook compliance visualization
+              </li>
+
+              <li>
+                Log Analytics workspace for operational telemetry
+                and investigation
+              </li>
+
+              <li>
+                Azure Monitor alerting
+              </li>
+
+              <li>
+                Action Group email notification
+              </li>
+
+              <li>
+                Azure Policy remediation tasks
+              </li>
             </ul>
           </article>
         </div>
@@ -488,17 +640,46 @@ Storage setting hardened     │
       <section className="cp-section">
         <div className="cp-heading">
           <span>08 / PROJECT SNAPSHOT</span>
-          <h2>CLOUD POLICY COMPLIANCE / SYSTEM STATE.</h2>
+
+          <h2>
+            CLOUD POLICY COMPLIANCE / SYSTEM STATE.
+          </h2>
         </div>
 
         <div className="cp-snapshot">
           {[
-            ["ASSIGNMENT SCOPE", "mg-platform management group"],
-            ["GOVERNANCE RG", "rg-governance-core"],
-            ["WORKSPACE", "law-governance-core"],
-            ["ALERT PATH", "Policy state → scheduled query alert → Action Group email"],
-            ["REMEDIATION TARGET", "Storage Account blob public access disabled automatically"],
-            ["FINAL STATE", "Workbook clear, policy 100% compliant"],
+            [
+              "ASSIGNMENT SCOPE",
+              "mg-platform management group",
+            ],
+            [
+              "GOVERNANCE RG",
+              "rg-governance-core",
+            ],
+            [
+              "WORKSPACE",
+              "law-governance-core",
+            ],
+            [
+              "WORKBOOK SOURCE",
+              "Azure Resource Graph / PolicyResources",
+            ],
+            [
+              "TELEMETRY",
+              "Activity Log → Log Analytics",
+            ],
+            [
+              "ALERT PATH",
+              "Policy state → Azure Monitor → Action Group email",
+            ],
+            [
+              "REMEDIATION TARGET",
+              "Storage Account blob public access disabled automatically",
+            ],
+            [
+              "FINAL STATE",
+              "Workbook clear, policy 100% compliant",
+            ],
           ].map(([label, value]) => (
             <div key={label}>
               <span>{label}</span>
@@ -511,7 +692,11 @@ Storage setting hardened     │
       <section id="lessons" className="cp-section">
         <div className="cp-heading">
           <span>09 / CHALLENGES & LESSONS</span>
-          <h2>WHAT BROKE — AND HOW IT WAS FIXED.</h2>
+
+          <h2>
+            WHAT BROKE — AND HOW IT WAS FIXED.
+          </h2>
+
           <p>
             The strongest engineering value came from real
             troubleshooting across policy state queries,
@@ -522,15 +707,25 @@ Storage setting hardened     │
 
         <div className="cp-lessons">
           {lessons.map((lesson, index) => (
-            <details key={lesson.title} open={index === 0}>
+            <details
+              key={lesson.title}
+              open={index === 0}
+            >
               <summary>
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <strong>{lesson.title}</strong>
+                <span>
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+
+                <strong>
+                  {lesson.title}
+                </strong>
+
                 <i>+</i>
               </summary>
 
               <div>
                 <p>{lesson.body}</p>
+
                 <ul>
                   {lesson.points.map((point) => (
                     <li key={point}>{point}</li>
@@ -543,8 +738,14 @@ Storage setting hardened     │
       </section>
 
       <footer className="cp-footer">
-        <Link href="/#projects">← ALL PROJECTS</Link>
-        <span>CLOUD POLICY COMPLIANCE / AZURE GOVERNANCE ENGINEERING</span>
+        <Link href="/#projects">
+          ← ALL PROJECTS
+        </Link>
+
+        <span>
+          CLOUD POLICY COMPLIANCE / AZURE GOVERNANCE ENGINEERING
+        </span>
+
         <Link href="/projects/cloud-policy-compliance-dashboard/deep-dive">
           ENGINEERING DEEP DIVE →
         </Link>

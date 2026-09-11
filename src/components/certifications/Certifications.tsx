@@ -26,6 +26,7 @@ export function Certifications() {
           className="cert-khud-grid"
           aria-hidden="true"
         />
+
         <div
           className="cert-khud-scan"
           aria-hidden="true"
@@ -34,6 +35,7 @@ export function Certifications() {
         <div className="cert-khud-header">
           <div>
             <span className="cert-khud-live" />
+
             <strong>
               CREDENTIAL CONTROL / MICROSOFT AZURE
             </strong>
@@ -45,6 +47,7 @@ export function Certifications() {
         </div>
 
         <div className="cert-khud-body">
+          {/* AZ-900 */}
           <article className="cert-khud-card cert-khud-card-earned">
             <div className="cert-khud-index">
               <span>01</span>
@@ -133,6 +136,7 @@ export function Certifications() {
             </div>
           </article>
 
+          {/* AZ-104 */}
           <article className="cert-khud-card cert-khud-card-progress">
             <div className="cert-khud-index">
               <span>02</span>
@@ -197,20 +201,20 @@ export function Certifications() {
                 <span>MONITORING</span>
               </div>
 
-              <div className="cert-khud-path">
-                <div className="cert-khud-path-head">
-                  <span>
-                    PATH PROGRESS / 58%
-                  </span>
+              <div className="cert-khud-actions">
+                <div>
+                  <small>
+                    PATHWAY STATUS
+                  </small>
 
                   <strong>
-                    TARGET / Q3 2026
+                    ACTIVE STUDY / AZ-104
                   </strong>
                 </div>
 
-                <div className="cert-khud-track">
-                  <span />
-                </div>
+                <span className="cert-khud-path-target">
+                  TARGET / Q3 2026
+                </span>
               </div>
             </div>
           </article>
