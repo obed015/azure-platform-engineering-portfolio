@@ -3,14 +3,12 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
-const technologies = [
-  "AZURE",
-  "ENTRA ID",
-  "TERRAFORM",
-  "POWERSHELL",
-  "INTUNE",
-  "MICROSOFT GRAPH",
-];
+import {
+  HiArrowDown,
+  HiArrowRight,
+  HiOutlineDocumentDownload,
+  HiOutlineMail,
+} from "react-icons/hi";
 
 export function Hero() {
   const heroRef = useRef<HTMLElement>(null);
@@ -32,49 +30,55 @@ export function Hero() {
       });
 
       timeline
-        .from(".hero-eyebrow", {
+        .from(".hero-name", {
           opacity: 0,
-          y: 16,
-          duration: 0.45,
+          y: 38,
+          duration: 0.7,
         })
         .from(
-          ".hero-name-line",
+          ".hero-positioning",
           {
             opacity: 0,
-            y: 70,
-            duration: 0.8,
-            stagger: 0.12,
+            y: 22,
+            duration: 0.55,
           },
-          "-=0.15"
+          "-=0.32"
         )
         .from(
-          ".hero-statement-item",
+          ".hero-description-new",
           {
             opacity: 0,
-            y: 14,
-            duration: 0.4,
-            stagger: 0.08,
+            y: 18,
+            duration: 0.5,
+          },
+          "-=0.28"
+        )
+        .from(
+          ".hero-actions-zone",
+          {
+            opacity: 0,
+            y: 18,
+            duration: 0.45,
+          },
+          "-=0.22"
+        )
+        .from(
+          ".hero-side-meta",
+          {
+            opacity: 0,
+            x: 20,
+            duration: 0.5,
           },
           "-=0.35"
         )
         .from(
-          ".hero-description",
+          ".hero-scroll-cue",
           {
             opacity: 0,
-            y: 14,
-            duration: 0.45,
+            y: 12,
+            duration: 0.4,
           },
-          "-=0.15"
-        )
-        .from(
-          ".hero-tech-item",
-          {
-            opacity: 0,
-            y: 10,
-            duration: 0.35,
-            stagger: 0.05,
-          },
-          "-=0.15"
+          "-=0.25"
         );
     }, heroRef);
 
@@ -83,61 +87,129 @@ export function Hero() {
 
   return (
     <section
+      id="top"
       ref={heroRef}
-      className="foundation-screen"
+      className="hero-screen"
     >
-      <div className="foundation-content">
-        <p className="eyebrow hero-eyebrow">
-          CLOUD_PLATFORM_ENGINEER
-        </p>
-
-        <h1>
-          <span className="hero-name-line">
-            OBED
-          </span>
-
-          <br />
-
-          <span className="hero-name-line">
-            OWUSU
-          </span>
+      <div className="hero-content-new">
+        <h1 className="hero-name">
+          OBED OWUSU
         </h1>
 
-        <div className="statement">
-          <span className="hero-statement-item">
-            BUILD.
-          </span>
+        <h2 className="hero-positioning">
+          ENGINEERING SECURE, AUTOMATED{" "}
+          <span>AZURE CLOUD PLATFORMS</span>
+        </h2>
 
-          <span className="hero-statement-item">
-            SECURE.
-          </span>
+        <p className="hero-description-new">
+          Cloud Platform Engineer building across Azure
+          infrastructure, identity, security, automation
+          and modern endpoint management.
+        </p>
 
-          <span className="hero-statement-item">
-            AUTOMATE.
-          </span>
+        <div className="hero-actions-zone">
+          <div className="hero-primary-stack">
+            <a
+              href="#contact"
+              className="hero-action hero-action-primary"
+            >
+              <span className="hero-action-decoration" />
+              <HiOutlineMail aria-hidden="true" />
+              <span>HIRE ME</span>
+              <small>MAIL</small>
+            </a>
 
-          <span className="hero-statement-item">
-            OPERATE.
-          </span>
+            <a
+              href="#projects"
+              className="hero-explore-control"
+              aria-label="Discover my projects"
+            >
+              <svg
+                className="hero-explore-text"
+                viewBox="0 0 200 200"
+                aria-hidden="true"
+              >
+                <defs>
+                  <path
+                    id="heroExplorePath"
+                    d="
+                      M 100,100
+                      m -72,0
+                      a 72,72 0 1,1 144,0
+                      a 72,72 0 1,1 -144,0
+                    "
+                  />
+                </defs>
+
+                <text>
+                  <textPath
+                    href="#heroExplorePath"
+                    startOffset="0%"
+                  >
+                    DISCOVER MY WORK • EXPLORE PROJECTS •
+                  </textPath>
+                </text>
+              </svg>
+
+              <span className="hero-explore-inner">
+                <HiArrowRight aria-hidden="true" />
+              </span>
+            </a>
+          </div>
+
+          <a
+            href="#"
+            className="hero-action hero-action-secondary"
+          >
+            <span className="hero-action-decoration" />
+
+            <HiOutlineDocumentDownload
+              aria-hidden="true"
+            />
+
+            <span>RESUME</span>
+
+            <small>PDF</small>
+          </a>
+        </div>
+      </div>
+
+      <div className="hero-side-meta">
+        <div className="hero-meta-block">
+          <span>BASED IN</span>
+          <strong>
+            UNITED
+            <br />
+            KINGDOM
+          </strong>
         </div>
 
-        <p className="description hero-description">
-          Building secure, automated and observable Azure
-          platforms across infrastructure, identity,
-          security, integration and endpoint management.
-        </p>
+        <div className="hero-meta-block">
+          <span>SPECIALISING IN</span>
+          <strong>
+            AZURE PLATFORM
+            <br />
+            ENGINEERING
+          </strong>
+        </div>
+
+        <div className="hero-meta-block hero-meta-featured">
+          <span>FEATURED WORK</span>
+          <strong>
+            SECURECLOUD
+            <br />
+            HUB
+          </strong>
+        </div>
       </div>
 
-      <div className="foundation-footer">
-        {technologies.map((technology) => (
-          <span
-            key={technology}
-            className="hero-tech-item"
-          >
-            {technology}
-          </span>
-        ))}
-      </div>
+      <a
+        href="#about"
+        className="hero-scroll-cue"
+      >
+        <span>SCROLL DOWN</span>
+        <HiArrowDown aria-hidden="true" />
+      </a>
     </section>
   );
 }

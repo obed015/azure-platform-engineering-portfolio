@@ -1,33 +1,27 @@
 import type { Metadata } from "next";
+import {
+  Orbitron,
+  Rajdhani,
+} from "next/font/google";
+
 import "./globals.css";
 
+const orbitron = Orbitron({
+  variable: "--font-orbitron",
+  subsets: ["latin"],
+  weight: ["500", "600", "700", "800"],
+});
+
+const rajdhani = Rajdhani({
+  variable: "--font-rajdhani",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+
 export const metadata: Metadata = {
-  title: {
-    default: "Obed Owusu | Cloud Platform Engineer",
-    template: "%s | Obed Owusu",
-  },
-
+  title: "Obed Owusu | Cloud Platform Engineer",
   description:
-    "Cloud Platform Engineer focused on Microsoft Azure, platform engineering, identity, security, automation and modern endpoint management.",
-
-  keywords: [
-    "Obed Owusu",
-    "Cloud Platform Engineer",
-    "Azure Engineer",
-    "Microsoft Azure",
-    "Azure Platform Engineering",
-    "Microsoft Entra ID",
-    "Microsoft Intune",
-    "Terraform",
-    "PowerShell",
-    "Cloud Security",
-  ],
-
-  authors: [
-    {
-      name: "Obed Owusu",
-    },
-  ],
+    "Cloud Platform Engineer building secure, automated and observable Azure platforms across infrastructure, identity, security and endpoint management.",
 };
 
 export default function RootLayout({
@@ -37,7 +31,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body
+        className={`${orbitron.variable} ${rajdhani.variable}`}
+      >
+        {children}
+      </body>
     </html>
   );
 }
