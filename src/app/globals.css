@@ -25448,3 +25448,277 @@ and
     height: 38px !important;
   }
 }
+
+/* ============================================================
+   FINAL SMALL-SCREEN STABILITY PATCH — iPhone / <= 760px
+   Added after real-device review. Keep this block LAST.
+   Targets only mobile layout; desktop remains unchanged.
+   ============================================================ */
+
+@media (max-width: 760px) {
+  /* Anchor landings must clear the fixed HUD header. */
+  #about,
+  #skills,
+  #certifications,
+  #projects,
+  #experience,
+  #contact {
+    scroll-margin-top: 84px !important;
+  }
+
+  /* Reserve enough page space for the fixed bottom HUD. */
+  main {
+    padding-bottom: calc(72px + env(safe-area-inset-bottom)) !important;
+  }
+
+  /* HERO — compact the CTA stack without changing desktop. */
+  .hero-screen {
+    min-height: 100svh !important;
+    height: auto !important;
+    align-items: flex-start !important;
+    padding-top: 88px !important;
+    padding-bottom: calc(94px + env(safe-area-inset-bottom)) !important;
+  }
+
+  .hero-actions-zone {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 14px !important;
+    margin-top: 24px !important;
+  }
+
+  .hero-primary-stack {
+    width: 100% !important;
+    align-items: center !important;
+    gap: 12px !important;
+  }
+
+  .hero-actions-zone .hero-action,
+  .hero-action-secondary {
+    width: 100% !important;
+    min-width: 0 !important;
+    height: 58px !important;
+  }
+
+  .hero-explore-control {
+    width: 126px !important;
+    height: 126px !important;
+    margin: 2px auto 0 !important;
+  }
+
+  .hero-explore-inner {
+    width: 70px !important;
+    height: 70px !important;
+  }
+
+  .hero-explore-inner svg {
+    width: 30px !important;
+    height: 30px !important;
+  }
+
+  .hero-explore-text text {
+    font-size: 9px !important;
+    letter-spacing: 2.2px !important;
+  }
+
+  /* The fixed HUD already communicates page position on phones. */
+  .hero-scroll-cue {
+    display: none !important;
+  }
+
+  /* ABOUT TELEMETRY — remove desktop absolute positioning that
+     caused value / heading collisions on narrow screens. */
+  .persona-stats-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+    overflow: hidden !important;
+    margin-top: 22px !important;
+    padding-top: 24px !important;
+  }
+
+  .persona-stats-grid::before {
+    top: 8px !important;
+    right: 10px !important;
+    left: auto !important;
+    font-size: 5.5px !important;
+    letter-spacing: 0.11em !important;
+  }
+
+  .persona-stat-card {
+    position: relative !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    min-height: 0 !important;
+    padding: 18px 16px 17px !important;
+  }
+
+  .persona-stat-card + .persona-stat-card {
+    border-left: 0 !important;
+    border-top: 1px solid rgba(0, 243, 220, 0.075) !important;
+  }
+
+  .persona-stat-card::after {
+    position: static !important;
+    width: 24px !important;
+    height: 8px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .persona-stat-value {
+    position: static !important;
+    display: block !important;
+    margin: 0 0 7px !important;
+    font-size: clamp(23px, 7vw, 30px) !important;
+    line-height: 1 !important;
+  }
+
+  .persona-stat-heading {
+    position: static !important;
+    display: block !important;
+    margin: 0 !important;
+    font-size: 14px !important;
+    line-height: 1.15 !important;
+  }
+
+  .persona-stat-copy {
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 7px 0 0 !important;
+    font-size: 11px !important;
+    line-height: 1.4 !important;
+  }
+
+  /* CERTIFICATIONS — reduce badge stage so cards do not become
+     disproportionately tall on iPhone-sized viewports. */
+  .cert-khud-badge-stage {
+    min-height: 166px !important;
+    padding-block: 10px !important;
+  }
+
+  .cert-khud-badge-wrap-az900 {
+    width: min(61%, 132px) !important;
+  }
+
+  .cert-khud-badge-wrap-az104 {
+    width: min(67%, 142px) !important;
+  }
+
+  .cert-khud-badge-caption {
+    left: 9px !important;
+    bottom: 8px !important;
+    font-size: 7px !important;
+  }
+
+  .cert-khud-info {
+    padding-top: 16px !important;
+    padding-bottom: 17px !important;
+  }
+
+  /* FIXED MOBILE NAV — slimmer, safer, and less intrusive. */
+  .hud-bottom-nav {
+    left: 8px !important;
+    right: 8px !important;
+    bottom: max(3px, env(safe-area-inset-bottom)) !important;
+    width: auto !important;
+    height: 46px !important;
+    min-height: 46px !important;
+    gap: 1px !important;
+    padding: 3px !important;
+    border-radius: 15px !important;
+    background: rgba(5, 7, 10, 0.9) !important;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28) !important;
+  }
+
+  .hud-bottom-link {
+    height: 38px !important;
+    padding: 0 1px !important;
+    font-size: 7px !important;
+    line-height: 1 !important;
+    letter-spacing: 0 !important;
+  }
+
+  .hud-bottom-link::after {
+    bottom: 3px !important;
+    width: 3px !important;
+    height: 3px !important;
+  }
+
+  .hud-bottom-link-active {
+    border-radius: 11px !important;
+  }
+
+  /* Give each section enough trailing air that its final controls
+     are not visually swallowed by the fixed bottom navigation. */
+  #about.section-shell,
+  #skills.section-shell,
+  #certifications.section-shell,
+  #projects.section-shell,
+  #experience.section-shell {
+    padding-bottom: 72px !important;
+  }
+
+  #contact.section-shell {
+    padding-bottom: calc(112px + env(safe-area-inset-bottom)) !important;
+  }
+}
+
+@media (max-width: 430px) {
+  .hero-screen {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+
+  .hero-actions-zone {
+    margin-top: 20px !important;
+    gap: 12px !important;
+  }
+
+  .hero-explore-control {
+    width: 118px !important;
+    height: 118px !important;
+  }
+
+  .hero-explore-inner {
+    width: 66px !important;
+    height: 66px !important;
+  }
+
+  .persona-stat-card {
+    padding: 16px 14px !important;
+  }
+
+  .cert-khud-card {
+    grid-template-columns: 36px minmax(0, 1fr) !important;
+  }
+
+  .cert-khud-badge-stage {
+    min-height: 154px !important;
+  }
+
+  .cert-khud-badge-wrap-az900 {
+    width: min(60%, 122px) !important;
+  }
+
+  .cert-khud-badge-wrap-az104 {
+    width: min(66%, 132px) !important;
+  }
+
+  .hud-bottom-nav {
+    left: 5px !important;
+    right: 5px !important;
+    height: 44px !important;
+    min-height: 44px !important;
+    padding: 3px 2px !important;
+  }
+
+  .hud-bottom-link {
+    height: 36px !important;
+    font-size: 6.5px !important;
+  }
+}
