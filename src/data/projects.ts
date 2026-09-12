@@ -18,54 +18,57 @@ export type PortfolioProject = {
 
 export const portfolioProjects: PortfolioProject[] = [
   {
-    slug: "azure-onboarding-automator",
+    slug: "azure-enterprise-integration-platform",
     number: "01",
-    title: "AZURE ONBOARDING AUTOMATOR",
-    category: "IDENTITY AUTOMATION",
+    title: "AZURE ENTERPRISE INTEGRATION PLATFORM",
+    category: "PLATFORM OPERATIONS",
     summary:
-      "HR-driven Azure identity automation that turns new-starter requests into repeatable Entra ID provisioning, group assignment, notifications and audit evidence.",
+      "Production-style integration operations across APIM, Logic Apps, Service Bus, Dataverse and Azure Monitor — built, broken, investigated, recovered and documented.",
     outcome:
-      "A controlled onboarding pattern that reduces manual identity work and makes access assignment easier to review and troubleshoot.",
+      "An integration platform designed around both the happy path and realistic day-two operational failure scenarios.",
     stack: [
+      "API Management",
       "Logic Apps",
-      "Entra ID",
-      "RBAC",
-      "Security Groups",
+      "Service Bus",
+      "Dataverse",
       "Azure Monitor",
-      "Outlook",
+      "Runbooks",
     ],
     sourceUrl:
-      "https://oowusu.com/azure-onboard-automator.html",
+      "https://oowusu.com/Azure%20Integration%20Operations.html",
     architecture: [
-      "HR / manager onboarding request",
-      "SharePoint list or email trigger",
-      "Azure Logic App orchestration",
-      "Microsoft Entra ID user creation",
-      "Security group assignment",
-      "Welcome + stakeholder notification",
-      "Logic App run history + Entra logs",
+      "API client / APIM test console",
+      "Azure API Management",
+      "Producer Logic App",
+      "Dynamics 365 / Dataverse",
+      "Service Bus queue",
+      "Consumer Logic App",
+      "Decode + parse + process",
+      "Azure Monitor alerts",
+      "Operational runbooks",
     ],
     panels: [
       {
-        kicker: "PROBLEM",
-        title: "MANUAL ONBOARDING CREATES INCONSISTENCY.",
+        kicker: "INTEGRATION",
+        title: "APIM CONTROLS THE ENTRY POINT.",
         body:
-          "The project replaces repeated user creation and ad-hoc access handoffs with a structured workflow that receives starter data, provisions identity and applies standard access patterns.",
+          "API Management fronts the producer workflow, providing a controlled gateway layer for backend routing, policy behaviour and rate-limit testing.",
       },
       {
-        kicker: "CONTROL",
-        title: "IDENTITY AND ACCESS BECOME REPEATABLE.",
+        kicker: "RESILIENCE",
+        title: "SERVICE BUS DECOUPLES PRODUCER AND CONSUMER.",
         body:
-          "Microsoft Entra ID remains the identity source of truth while Logic Apps orchestrates creation, security-group assignment and stakeholder communication.",
+          "Queued account events allow the downstream consumer to fail, recover and drain backlog without losing the producer-side integration flow.",
       },
       {
         kicker: "OPERATIONS",
-        title: "EVERY RUN LEAVES EVIDENCE.",
+        title: "FAILURES ARE PART OF THE DESIGN.",
         body:
-          "Logic App run history and Entra logs provide the operational trail needed to validate successful onboarding and investigate failures.",
+          "The build intentionally tests authentication failures, throttling, queue backlog and parsing incidents, then captures recovery steps in monitoring evidence and runbooks.",
       },
     ],
   },
+
   {
     slug: "securecloud-hub",
     number: "02",
@@ -120,6 +123,7 @@ export const portfolioProjects: PortfolioProject[] = [
       },
     ],
   },
+
   {
     slug: "cloud-policy-compliance-dashboard",
     number: "03",
@@ -132,10 +136,10 @@ export const portfolioProjects: PortfolioProject[] = [
     stack: [
       "Azure Policy",
       "Bicep",
-      "Log Analytics",
+      "Azure Resource Graph",
       "Workbooks",
+      "Log Analytics",
       "Azure Monitor",
-      "KQL",
       "Managed Identity",
     ],
     sourceUrl:
@@ -146,9 +150,9 @@ export const portfolioProjects: PortfolioProject[] = [
       "GitHub / local repo",
       "Bicep governance deployment",
       "Management-group initiative assignment",
-      "Policy states + Log Analytics",
+      "Azure Resource Graph / PolicyResources",
       "Azure Workbook compliance view",
-      "Scheduled query alert + Action Group",
+      "Azure Monitor alert + Action Group",
       "Managed identity remediation",
       "Storage setting hardened",
       "Compliance restored",
@@ -164,7 +168,7 @@ export const portfolioProjects: PortfolioProject[] = [
         kicker: "OBSERVABILITY",
         title: "COMPLIANCE IS VISIBLE AND ACTIONABLE.",
         body:
-          "Workbook views, Log Analytics and Azure Monitor alerts turn raw policy state into operational evidence that teams can review and respond to.",
+          "Azure Workbook views query Azure Resource Graph PolicyResources for compliance state, while Log Analytics supports operational telemetry and investigation.",
       },
       {
         kicker: "REMEDIATION",
@@ -174,6 +178,7 @@ export const portfolioProjects: PortfolioProject[] = [
       },
     ],
   },
+
   {
     slug: "weather-tracker",
     number: "04",
@@ -227,54 +232,53 @@ export const portfolioProjects: PortfolioProject[] = [
       },
     ],
   },
+
   {
-    slug: "azure-enterprise-integration-platform",
+    slug: "azure-onboarding-automator",
     number: "05",
-    title: "AZURE ENTERPRISE INTEGRATION PLATFORM",
-    category: "PLATFORM OPERATIONS",
+    title: "AZURE ONBOARDING AUTOMATOR",
+    category: "IDENTITY AUTOMATION",
     summary:
-      "Production-style integration operations across APIM, Logic Apps, Service Bus, Dataverse and Azure Monitor — built, broken, investigated, recovered and documented.",
+      "HR-driven Azure identity automation that turns new-starter requests into repeatable Entra ID provisioning, group assignment, notifications and audit evidence.",
     outcome:
-      "An integration platform designed around both the happy path and realistic day-two operational failure scenarios.",
+      "A controlled onboarding pattern that reduces manual identity work and makes access assignment easier to review and troubleshoot.",
     stack: [
-      "API Management",
       "Logic Apps",
-      "Service Bus",
-      "Dataverse",
+      "Entra ID",
+      "RBAC",
+      "Security Groups",
       "Azure Monitor",
-      "Runbooks",
+      "Outlook",
     ],
     sourceUrl:
-      "https://oowusu.com/Azure%20Integration%20Operations.html",
+      "https://oowusu.com/azure-onboard-automator.html",
     architecture: [
-      "API client / APIM test console",
-      "Azure API Management",
-      "Producer Logic App",
-      "Dynamics 365 / Dataverse",
-      "Service Bus queue",
-      "Consumer Logic App",
-      "Decode + parse + process",
-      "Azure Monitor alerts",
-      "Operational runbooks",
+      "HR / manager onboarding request",
+      "SharePoint list or email trigger",
+      "Azure Logic App orchestration",
+      "Microsoft Entra ID user creation",
+      "Security group assignment",
+      "Welcome + stakeholder notification",
+      "Logic App run history + Entra logs",
     ],
     panels: [
       {
-        kicker: "INTEGRATION",
-        title: "APIM CONTROLS THE ENTRY POINT.",
+        kicker: "PROBLEM",
+        title: "MANUAL ONBOARDING CREATES INCONSISTENCY.",
         body:
-          "API Management fronts the producer workflow, providing a controlled gateway layer for backend routing, policy behaviour and rate-limit testing.",
+          "The project replaces repeated user creation and ad-hoc access handoffs with a structured workflow that receives starter data, provisions identity and applies standard access patterns.",
       },
       {
-        kicker: "RESILIENCE",
-        title: "SERVICE BUS DECOUPLES PRODUCER AND CONSUMER.",
+        kicker: "CONTROL",
+        title: "IDENTITY AND ACCESS BECOME REPEATABLE.",
         body:
-          "Queued account events allow the downstream consumer to fail, recover and drain backlog without losing the producer-side integration flow.",
+          "Microsoft Entra ID remains the identity source of truth while Logic Apps orchestrates creation, security-group assignment and stakeholder communication.",
       },
       {
         kicker: "OPERATIONS",
-        title: "FAILURES ARE PART OF THE DESIGN.",
+        title: "EVERY RUN LEAVES EVIDENCE.",
         body:
-          "The build intentionally tests authentication failures, throttling, queue backlog and parsing incidents, then captures recovery steps in monitoring evidence and runbooks.",
+          "Logic App run history and Entra logs provide the operational trail needed to validate successful onboarding and investigate failures.",
       },
     ],
   },

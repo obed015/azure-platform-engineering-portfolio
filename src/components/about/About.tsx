@@ -13,8 +13,8 @@ const capabilities = [
 const stats = [
   {
     value: "5+",
-    heading: "YEARS IN IT",
-    copy: "Infrastructure & Cloud Platform Engineering",
+    heading: "YEARS",
+    copy: "IT Infrastructure, Support & Cloud",
   },
   {
     value: "5 LIVE",
@@ -91,18 +91,25 @@ export function About() {
               className="persona-corner persona-corner-tl"
               aria-hidden="true"
             />
+
             <div
               className="persona-corner persona-corner-tr"
               aria-hidden="true"
             />
+
             <div
               className="persona-corner persona-corner-bl"
               aria-hidden="true"
             />
+
             <div
               className="persona-corner persona-corner-br"
               aria-hidden="true"
             />
+
+            <span className="persona-frame-id">
+              OO // 01
+            </span>
           </div>
         </div>
 

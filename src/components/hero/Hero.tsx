@@ -6,7 +6,6 @@ import gsap from "gsap";
 import {
   HiArrowDown,
   HiArrowRight,
-  HiOutlineDocumentDownload,
   HiOutlineMail,
 } from "react-icons/hi";
 
@@ -110,19 +109,22 @@ export function Hero() {
         <div className="hero-actions-zone">
           <div className="hero-primary-stack">
             <a
-              href="#contact"
+              href="#projects"
               className="hero-action hero-action-primary"
             >
               <span className="hero-action-decoration" />
-              <HiOutlineMail aria-hidden="true" />
-              <span>HIRE ME</span>
-              <small>MAIL</small>
+
+              <HiArrowRight aria-hidden="true" />
+
+              <span>VIEW PROJECTS</span>
+
+              <small>WORK</small>
             </a>
 
             <a
               href="#projects"
               className="hero-explore-control"
-              aria-label="Discover my projects"
+              aria-label="Explore engineering projects"
             >
               <svg
                 className="hero-explore-text"
@@ -158,18 +160,16 @@ export function Hero() {
           </div>
 
           <a
-            href="#"
+            href="#contact"
             className="hero-action hero-action-secondary"
           >
             <span className="hero-action-decoration" />
 
-            <HiOutlineDocumentDownload
-              aria-hidden="true"
-            />
+            <HiOutlineMail aria-hidden="true" />
 
-            <span>RESUME</span>
+            <span>CONTACT ME</span>
 
-            <small>PDF</small>
+            <small>MAIL</small>
           </a>
         </div>
       </div>
@@ -177,6 +177,7 @@ export function Hero() {
       <div className="hero-side-meta">
         <div className="hero-meta-block">
           <span>BASED IN</span>
+
           <strong>
             UNITED
             <br />
@@ -186,6 +187,7 @@ export function Hero() {
 
         <div className="hero-meta-block">
           <span>SPECIALISING IN</span>
+
           <strong>
             AZURE PLATFORM
             <br />
@@ -195,10 +197,11 @@ export function Hero() {
 
         <div className="hero-meta-block hero-meta-featured">
           <span>FEATURED WORK</span>
+
           <strong>
-            SECURECLOUD
+            SecureCloud
             <br />
-            HUB
+            Hub
           </strong>
         </div>
       </div>
