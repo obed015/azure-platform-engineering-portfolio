@@ -6,6 +6,7 @@ import gsap from "gsap";
 import {
   HiArrowDown,
   HiArrowRight,
+  HiOutlineDocumentDownload,
   HiOutlineMail,
 } from "react-icons/hi";
 
@@ -109,16 +110,18 @@ export function Hero() {
         <div className="hero-actions-zone">
           <div className="hero-primary-stack">
             <a
-              href="#projects"
+              href="https://raw.githubusercontent.com/obed015/assets-cv/main/Obed_Owusu_Cloud_Platform_Engineer.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="hero-action hero-action-primary"
             >
               <span className="hero-action-decoration" />
 
-              <HiArrowRight aria-hidden="true" />
+              <HiOutlineDocumentDownload aria-hidden="true" />
 
-              <span>VIEW PROJECTS</span>
+              <span>RESUME</span>
 
-              <small>WORK</small>
+              <small>PDF</small>
             </a>
 
             <a
